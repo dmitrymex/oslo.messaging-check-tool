@@ -1,0 +1,4 @@
+*.py[cod]
+oslo.messaging-check-tool/.idea/
+oslo.messaging-check-tool/.tox
+oslo.messaging-check-tool/oslo.messaging_check_tool.egg-info
