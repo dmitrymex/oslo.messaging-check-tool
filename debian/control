@@ -1,4 +1,3 @@
-Version: 1.0-1
 Source: oslo.messaging-check-tool
 Priority: extra
 Maintainer: Dmitry Mescheryakov <dmescheryakov@mirantis.com>
