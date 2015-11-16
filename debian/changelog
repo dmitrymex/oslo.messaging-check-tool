@@ -1,0 +1,5 @@
+oslo.messaging-check-tool (1.0-1~u14.04+mos1) mos8.0; urgency=medium
+
+  * The initial version of the package 
+
+ -- Dmitry Mescheryakov <dmescheryakov@mirantis.com>  Fri, 25 Sep 2015 18:52:23 +0300

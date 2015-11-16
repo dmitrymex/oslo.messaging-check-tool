@@ -1,0 +1,32 @@
+Version: 1.0-1
+Source: oslo.messaging-check-tool
+Priority: extra
+Maintainer: Dmitry Mescheryakov <dmescheryakov@mirantis.com>
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               dh-systemd,
+               openstack-pkg-tools (>= 23~),
+               po-debconf,
+               python-all,
+               python-pbr (>= 1.6),
+               python-setuptools,
+               python-sphinx,
+Build-Depends-Indep: python-babel,
+                     python-eventlet (>= 0.17.4),
+                     python-flask,
+                     python-oslo.config (>= 1:2.3.0),
+                     python-oslo.log (>= 1.8.0),
+                     python-oslo.messaging (>= 1.16.0),
+                     python-oslosphinx (>= 2.5.0),
+
+Package: oslo.messaging-check-tool
+Architecture: all
+Section: python
+Depends: python-babel,
+         python-eventlet (>= 0.17.4),
+         python-flask,
+         python-oslo.config (>= 1:2.3.0),
+         python-oslo.log (>= 1.8.0),
+         python-oslo.messaging (>= 1.16.0),
+         python-oslosphinx (>= 2.5.0)
+Description: Some dummy text here
