@@ -2,6 +2,7 @@ import eventlet
 eventlet.monkey_patch()
 
 import sys
+import time
 
 from oslo_log import log
 from oslo_config import cfg
@@ -24,10 +25,13 @@ LOG = None
 
 
 class RpcEndpoint(object):
-    def test_method(self, ctxt, a):
-        LOG.info('Somebody is calling test_method')
-        import time
-        time.sleep(a)
+    def test_method(self, ctxt, delay):
+        if delay == 0:
+            LOG.info('Somebody is calling test_method without delay')
+        else:
+            LOG.info('Somebody is calling test_method with delay %s' % delay)
+            time.sleep(delay)
+            LOG.info('test_method returns')
 
 
 def main():

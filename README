@@ -23,6 +23,7 @@ The built package could be found in the parent directory, like:
 HOW TO INSTALL
 
 Like a regular deb package:
+    sudo apt-get update
     sudo dpkg -i oslo.messaging-check-tool_1.0-1~u14.04+mos1_all.deb
 
 If the command above fails, run

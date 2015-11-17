@@ -39,8 +39,9 @@ def hello_world():
         request_id = req_counter
         req_counter += 1
 
-    a = int(request.args.get('a', 0))
-    rpc_client.test_method(request_id, a)
+    timeout = int(request.args.get('timeout', 60))
+    delay = int(request.args.get('delay', 0))
+    rpc_client.test_method(request_id, timeout, delay)
     return ''
 
 
@@ -50,9 +51,10 @@ class RpcClient(object):
                                   server=CONF.server_id)
         self._client = messaging.RPCClient(transport, target)
 
-    def test_method(self, request_id, a):
+    def test_method(self, request_id, timeout, delay):
         LOG.info('[request id: %i] Calling test_method' % request_id)
-        self._client.prepare(timeout=60).call({}, 'test_method', a=a)
+        self._client.prepare(timeout=timeout).call(
+            {}, 'test_method', delay=delay)
         LOG.info('[request id: %i] Server responded on our call' % request_id)
 
 
@@ -68,4 +70,4 @@ def main():
     transport = messaging.get_transport(cfg.CONF)
     rpc_client = RpcClient(transport)
 
-    app.run(threaded=True)
+    app.run(host='0.0.0.0', threaded=True)
