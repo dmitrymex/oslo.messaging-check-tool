@@ -4,6 +4,9 @@ HOW TO USE
 First you should provide a config file for messaging driver. Sample config
 for kombu driver could be found in oslo_msg_check.conf.sample in git repo.
 
+Check applications
+------------------
+
 The check pair of applications allows you to run two processes and
 then periodically check "RPC connectivity" between them.
 
@@ -14,6 +17,18 @@ To run them execute:
 Now whenever you send GET request to port 5000, oslo_msg_check_client
 will return 200 OK only it was able to send RPC request to
 oslo_msg_check_server and received reply from it.
+
+Load applications
+-----------------
+
+The load pair of applications allows to load messages into rabbitmq
+and consume them. It uses oslo.messaging notification mechanism.
+
+To put messages into RabbitMQ run
+    oslo_msg_load_generator --config-file oslo_msg_check.conf --messages-to-send 1000
+
+To read them, run
+    oslo_msg_load_consumer --config-file oslo_msg_check.conf
 
 
 HOW TO INSTALL
