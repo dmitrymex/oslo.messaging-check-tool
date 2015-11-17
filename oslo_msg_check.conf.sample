@@ -1,0 +1,7 @@
+[DEFAULT]
+debug=true
+
+[oslo_messaging_rabbit]
+rabbit_hosts = 192.168.0.3:5673, 192.168.0.4:5673, 192.168.0.5:5673
+rabbit_userid = nova
+rabbit_password = superpassword

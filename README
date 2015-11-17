@@ -1,4 +1,34 @@
+HOW TO USE
+==========
+
+First you should provide a config file for messaging driver. Sample config
+for kombu driver could be found in oslo_msg_check.conf.sample in git repo.
+
+The check pair of applications allows you to run two processes and
+then periodically check "RPC connectivity" between them.
+
+To run them execute:
+    oslo_msg_check_client --config-file oslo_msg_check.conf
+    oslo_msg_check_server --config-file oslo_msg_check.conf
+
+Now whenever you send GET request to port 5000, oslo_msg_check_client
+will return 200 OK only it was able to send RPC request to
+oslo_msg_check_server and received reply from it.
+
+
+HOW TO INSTALL
+==============
+
+Like a regular deb package:
+    sudo apt-get update
+    sudo dpkg -i oslo.messaging-check-tool_1.0-1~u14.04+mos1_all.deb
+
+If the command above fails, run
+    sudo apt-get -f install
+
+
 HOW TO BUILD
+============
 
 Get an Ubuntu 14.04 machine
 
@@ -19,12 +49,3 @@ Build the package
 The built package could be found in the parent directory, like:
     ../oslo.messaging-check-tool_1.0-1~u14.04+mos1_all.deb
 
-
-HOW TO INSTALL
-
-Like a regular deb package:
-    sudo apt-get update
-    sudo dpkg -i oslo.messaging-check-tool_1.0-1~u14.04+mos1_all.deb
-
-If the command above fails, run
-    sudo apt-get -f install
