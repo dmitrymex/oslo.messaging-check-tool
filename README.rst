@@ -43,7 +43,10 @@ To read them, run
 HOW TO INSTALL
 ==============
 
-Like a regular deb package
+Built your deb or take one from the git repository. But, in later case it
+is up to you to make sure that it was built from the latest sources!
+
+Install the deb like a regular deb package
 
 ::
 
