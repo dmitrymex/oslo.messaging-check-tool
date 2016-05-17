@@ -63,14 +63,7 @@ If the command above fails, run
 HOW TO BUILD
 ============
 
-Get an Ubuntu 14.04 machine
-
-::
-
-    sudo apt-get update
-    sudo apt-get install git dpkg-dev debhelper dh-systemd openstack-pkg-tools po-debconf python-all python-pbr python-setuptools python-sphinx python-babel python-eventlet python-flask python-oslo.config python-oslo.log python-oslo.messaging python-oslosphinx
-
-Clone the project to it:
+Get an Ubuntu 14.04 machine and clone the project to it:
 
 ::
 
@@ -82,7 +75,14 @@ Add Fuel mirrors, for 8.0 do
 ::
 
     sudo tar -xzf aptsources.tgz -C /etc/apt/
+
+Install the dependencies and build tools
+
+::
+
     sudo apt-get update
+    sudo apt-get install git dpkg-dev debhelper dh-systemd openstack-pkg-tools po-debconf python-all python-pbr python-setuptools python-sphinx python-babel python-eventlet python-flask python-oslo.config python-oslo.log python-oslo.messaging python-oslosphinx
+
 
 Build the package
 

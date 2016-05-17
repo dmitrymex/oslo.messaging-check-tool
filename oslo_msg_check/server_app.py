@@ -8,13 +8,15 @@ from oslo_log import log
 from oslo_config import cfg
 import oslo_messaging as messaging
 
-
 opts = [
+    cfg.StrOpt('topic',
+               help='Topic name.',
+               default='test_rpc'),
     cfg.StrOpt('server_id',
-               help='A string uniquely identifying current instance. Used'
-                    'by server to distinguish instances.',
+               help='A string uniquely identifying target instance.',
                default='server123'),
 ]
+
 CONF = cfg.CONF
 CONF.register_cli_opts(opts)
 
@@ -45,7 +47,7 @@ def main():
     LOG.info('Running test_rpc_server from main()')
 
     transport = messaging.get_transport(cfg.CONF)
-    target = messaging.Target(topic='test_rpc', version='1.0',
+    target = messaging.Target(topic=CONF.topic, version='1.0',
                               server=CONF.server_id)
     server = messaging.get_rpc_server(transport, target,
                                       endpoints=[RpcEndpoint()],

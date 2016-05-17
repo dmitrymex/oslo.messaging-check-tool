@@ -12,10 +12,14 @@ import oslo_messaging as messaging
 
 
 opts = [
+    cfg.StrOpt('topic',
+               help='Topic name.',
+               default='test_rpc'),
     cfg.StrOpt('server_id',
                help='A string uniquely identifying target instance.',
                default='server123'),
 ]
+
 CONF = cfg.CONF
 CONF.register_cli_opts(opts)
 
@@ -47,7 +51,7 @@ def hello_world():
 
 class RpcClient(object):
     def __init__(self, transport):
-        target = messaging.Target(topic='test_rpc', version='1.0',
+        target = messaging.Target(topic=CONF.topic, version='1.0',
                                   server=CONF.server_id)
         self._client = messaging.RPCClient(transport, target)
 
