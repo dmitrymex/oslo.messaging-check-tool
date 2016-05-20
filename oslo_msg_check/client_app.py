@@ -12,6 +12,9 @@ import oslo_messaging as messaging
 
 
 opts = [
+    cfg.StrOpt('listen_port',
+               help='Client app will listen for HTTP requests on that port',
+               default=5000),
     cfg.StrOpt('topic',
                help='Topic name.',
                default='test_rpc'),
@@ -74,4 +77,4 @@ def main():
     transport = messaging.get_transport(cfg.CONF)
     rpc_client = RpcClient(transport)
 
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='0.0.0.0', port=CONF.listen_port, threaded=True)

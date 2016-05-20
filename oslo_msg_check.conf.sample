@@ -1,5 +1,6 @@
 [DEFAULT]
 debug=true
+listen_port=8080
 
 [oslo_messaging_rabbit]
 rabbit_hosts = 192.168.0.3:5673, 192.168.0.4:5673, 192.168.0.5:5673
