@@ -1,6 +1,7 @@
 import eventlet
 eventlet.monkey_patch()
 
+import signal
 import sys
 import threading
 import time
@@ -12,11 +13,32 @@ import oslo_messaging
 
 CONF = cfg.CONF
 
+opts = [
+    cfg.StrOpt('notif_topic_name',
+               help='Topic name for notifications',
+               default='sometopic'),
+    cfg.BoolOpt('infinite_loop',
+                help='',
+                default=False)
+]
+CONF.register_cli_opts(opts)
+
+
 log.register_options(CONF)
 LOG = None
 
 
 counter = 0
+infinite_loop = False
+
+
+def ctrlchandler(sig, frame):
+    global infinite_loop
+
+    LOG.info('Caught keyboard interrupt, finishing')
+    infinite_loop = False
+
+signal.signal(signal.SIGINT, ctrlchandler)
 
 
 class NotificationEndpoint(object):
@@ -31,6 +53,7 @@ class NotificationEndpoint(object):
 
 def main():
     global counter
+    global infinite_loop
     global LOG
 
     CONF(sys.argv[1:], project='load_consumer')
@@ -41,7 +64,7 @@ def main():
     transport = oslo_messaging.get_transport(cfg.CONF)
 
     targets = [
-        oslo_messaging.Target(topic='sometopic'),
+        oslo_messaging.Target(topic=CONF.notif_topic_name),
     ]
 
     endpoints = [
@@ -52,13 +75,20 @@ def main():
         transport, targets, endpoints)
 
     threading.Thread(target=server.start).start()
-    LOG.info('after threading')
+    #LOG.info('after threading')
+
+    infinite_loop = CONF.infinite_loop
 
     last_counter = -1
-    while last_counter < counter:
-        last_counter = counter
-        time.sleep(1)
-
-    print('Consumed %i messages' % counter)
+    try:
+        while last_counter < counter or infinite_loop:
+            last_counter = counter
+            time.sleep(1)
+    except OSError:
+        # That is how keyboard interrupt appears here
+        pass
 
     server.stop()
+    server.wait()
+
+    print('Consumed %i messages' % counter)

@@ -1,3 +1,9 @@
+oslo.messaging-check-tool (1.0-1~u14.04+mos4) mos8.0; urgency=medium
+
+  * Some apps can not run indefinitely + provided option for topic name for notifications
+
+ -- Dmitry Mescheryakov <dmescheryakov@mirantis.com>  Fri, 16 June 2016 19:03:23 +0300
+
 oslo.messaging-check-tool (1.0-1~u14.04+mos3) mos8.0; urgency=medium
 
   * Added HTTP listen port parameter to client app

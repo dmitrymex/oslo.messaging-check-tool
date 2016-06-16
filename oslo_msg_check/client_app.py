@@ -15,8 +15,8 @@ opts = [
     cfg.StrOpt('listen_port',
                help='Client app will listen for HTTP requests on that port',
                default=5000),
-    cfg.StrOpt('topic',
-               help='Topic name.',
+    cfg.StrOpt('rpc_topic_name',
+               help='RPC topic name.',
                default='test_rpc'),
     cfg.StrOpt('server_id',
                help='A string uniquely identifying target instance.',
@@ -54,7 +54,7 @@ def hello_world():
 
 class RpcClient(object):
     def __init__(self, transport):
-        target = messaging.Target(topic=CONF.topic, version='1.0',
+        target = messaging.Target(topic=CONF.rpc_topic_name, version='1.0',
                                   server=CONF.server_id)
         self._client = messaging.RPCClient(transport, target)
 
